@@ -6,6 +6,31 @@
     <script src="js/JSXTransformer.js"></script>
     <script src="js/jquery.min.js"></script>
   </head>
+  <style type="text/css">
+    .imageSection  {
+      display: inline-block;
+      height: 30px;
+      width : 30px;
+      float:left;
+      margin-right: 10px;
+    }
+    .commentWrapper {
+      overflow: auto;
+      width : 350px;
+      border: 1px solid #ddd;
+      padding: 3px;
+      margin : 0px auto;
+    }
+    
+    .commentAuthor {
+      margin-right: 4px;
+    }
+    .eachComment {
+      line-height : 20px;
+      float: right;
+      width : 88%;
+    }
+  </style>
   <body>
     <div id="content"></div>
     <script type="text/jsx">
@@ -15,19 +40,33 @@
         "comment" : "This is azhar, He writes lots of code every day"
       }, {
         "author" : "Jenny",
-        "comment" : "This is Jenny, She is amaizing developer"
+        "comment" : "This is Jenny, She is amaizing developer. And she also does testing. She plays violen too. Also a great TT player, some say "
       }];
 
 
       var Comment = React.createClass({
       	render : function() {
-      		return (<div class = "eachComment">
-              <div className = "commentAuthor">{this.props.author}</div>
-              <div className = "commentContent">{this.props.comment}</div>
+      		return (
+            <div className = "commentWrapper">
+              <div className = "imageSection"></div>
+              
+              <div className = "eachComment">
+                <a className = "commentAuthor" href = "javascript:void(0)">{this.props.author}</a>
+                <span className = "commentContent">{this.props.comment}</span>
+                <CommentActions />
+              </div>
+
             </div>);
       	}
       });
 
+      var CommentActions = React.createClass({
+        render : function (argument) {
+          return (<div>
+            <span>Like</span> <span>Reply</span>  
+            </div>);
+        }
+      });
 
       var CommentBox = React.createClass({
         
