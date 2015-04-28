@@ -37,10 +37,12 @@
       // Your code here
       var data = [{
         "author" : "Azhar",
-        "comment" : "This is azhar, He writes lots of code every day"
+        "comment" : "This is azhar, He writes lots of code every day",
+        "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Azhar"
       }, {
         "author" : "Jenny",
-        "comment" : "This is Jenny, She is amaizing developer. And she also does testing. She plays violen too. Also a great TT player, some say "
+        "comment" : "This is Jenny, She is amaizing developer. And she also does testing. She plays violen too. Also a great TT player, some say ",
+        "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny"
       }];
 
 
@@ -48,7 +50,9 @@
       	render : function() {
       		return (
             <div className = "commentWrapper">
-              <div className = "imageSection"></div>
+              <div className = "imageSection">
+               <img src = {this.props.img} />
+              </div>
               
               <div className = "eachComment">
                 <a className = "commentAuthor" href = "javascript:void(0)">{this.props.author}</a>
@@ -73,7 +77,7 @@
         render : function function_name (argument) {
          
          var comments = this.props.data.map(function(item) {
-            return (<Comment author = {item.author}  comment = {item.comment} />);
+            return (<Comment author = {item.author}  comment = {item.comment} img = {item.img}/>);
           });
           
           return (<div className = "allCommentContainer">{comments}</div>);
