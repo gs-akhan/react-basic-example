@@ -64,6 +64,7 @@
       	}
       });
 
+
       var CommentActions = React.createClass({
         render : function (argument) {
           return (<div>
@@ -74,9 +75,22 @@
 
       var CommentBox = React.createClass({
         
-        render : function function_name (argument) {
+        getInitialState : function(argument) {
+          return {data : []}
+        },
+        componentDidMount : function (argument) {
+          var self = this;
+          alert('Mounted');
+          setTimeout(function () {
+           // body...
+           self.setState({
+            data : data
+           })
+         },6000) 
+        },
+        render : function(argument) {
          
-         var comments = this.props.data.map(function(item) {
+         var comments = this.state.data.map(function(item) {
             return (<Comment author = {item.author}  comment = {item.comment} img = {item.img}/>);
           });
           
