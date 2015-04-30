@@ -81,12 +81,13 @@
         },
         componentDidMount : function (argument) {
           var self = this;
+          //Just to see if things work async ;)
           setTimeout(function () {
            // body...
            self.setState({
             data : data
            });
-         },1000) 
+         }) 
         },
         submitFormAndRefresh : function (obj) {
           this.state.data.push(obj);
