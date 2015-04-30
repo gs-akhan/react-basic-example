@@ -8,10 +8,10 @@
   </head>
   <style type="text/css">
     .imageSection  {
-      display: inline-block;
-      height: 30px;
-      width : 30px;
-      float:left;
+      display : block;
+      height  : 30px;
+      width   : 30px;
+      float   : left;
       margin-right: 10px;
     }
     .commentWrapper {
@@ -80,13 +80,12 @@
         },
         componentDidMount : function (argument) {
           var self = this;
-          alert('Mounted');
           setTimeout(function () {
            // body...
            self.setState({
             data : data
-           })
-         },6000) 
+           });
+         },1000) 
         },
         render : function(argument) {
          
