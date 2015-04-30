@@ -133,7 +133,7 @@
 
           return (<div style = {formStyle}>
               <form>
-              <textarea style = {textAreaStyle} ref = "postdata" onKeyUp = {this.handleKeyUp}>
+              <textarea  placeholder = "Enter your comment" style = {textAreaStyle} ref = "postdata" onKeyUp = {this.handleKeyUp}>
 
               </textarea>
               </form>
@@ -149,8 +149,6 @@
 
             React.findDOMNode(this.refs.postdata).value = "";
           }
-
-
         }
       });
 
