@@ -3,8 +3,8 @@
   <head>
     <title>Hello React</title>
     <script src="js/react.min.js"></script>
-    <script src="js/JSXTransformer.js"></script>
     <script src="js/jquery.min.js"></script>
+    
   </head>
   <style type="text/css">
     .imageSection  {
@@ -34,124 +34,7 @@
   </style>
   <body>
     <div id="content"></div>
-    <script type="text/jsx">
-      // Your code here
-      var data = [{
-        "author" : "Azhar",
-        "comment" : "This is azhar, He writes lots of code every day",
-        "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Azhar"
-      }, {
-        "author" : "Jenny",
-        "comment" : "This is Jenny, She is amaizing developer. And she also does testing. She plays violen too. Also a great TT player, some say ",
-        "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny"
-      }];
-
-
-      var Comment = React.createClass({
-      	render : function() {
-      		return (
-            <div className = "commentWrapper">
-              <div className = "imageSection">
-               <img src = {this.props.img} />
-              </div>
-              
-              <div className = "eachComment">
-                <a className = "commentAuthor" href = "javascript:void(0)">{this.props.author}</a>
-                <span className = "commentContent">{this.props.comment}</span>
-                <CommentActions />
-              </div>
-
-            </div>);
-      	}
-      });
-
-
-      var CommentActions = React.createClass({
-        render : function (argument) {
-          return (<div>
-            <span>Like</span> <span>Reply</span>  
-            </div>);
-        }
-      });
-
-      var CommentBox = React.createClass({
-        
-        getInitialState : function(argument) {
-          return {data : []}
-        },
-        componentDidMount : function (argument) {
-          var self = this;
-          //Just to see if things work async ;)
-          setTimeout(function () {
-           // body...
-           self.setState({
-            data : data
-           });
-         }) 
-        },
-        submitFormAndRefresh : function (obj) {
-          this.state.data.push(obj);
-          this.setState({
-            data : data
-          });
-        },
-        render : function(argument) {
-         
-         var comments = this.state.data.map(function(item) {
-            return (<Comment author = {item.author}  comment = {item.comment} img = {item.img}/>);
-          });
-          
-          return (
-            <div>
-              <div className = "allCommentContainer">
-              {comments}
-              <CommentForm submitdata = {this.submitFormAndRefresh} />
-              </div>
-            </div>
-            );
-        }
-
-      });
-
-      var CommentForm = React.createClass({
-
-        render : function() {
-          var textAreaStyle = {
-            width : "100%",
-            height : "60px",
-            resize : "none",
-            border : "1px solid #ddd",
-            outline : "none",
-            "box-sizing": "border-box"
-          }
-
-          var formStyle = {
-            width : "350px;",
-            margin : "0 auto"
-          }
-
-          return (<div style = {formStyle}>
-              <form>
-              <textarea  placeholder = "Enter your comment" style = {textAreaStyle} ref = "postdata" onKeyUp = {this.handleKeyUp}>
-
-              </textarea>
-              </form>
-            </div>);
-        },
-        handleKeyUp : function (evt) {
-          if(evt.keyCode === 13) {
-            this.props.submitdata({
-              author : "azhar",
-              comment : evt.currentTarget.value,
-              img : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny"
-            });
-
-            React.findDOMNode(this.refs.postdata).value = "";
-          }
-        }
-      });
-
-      React.render(<CommentBox data = {data} />, document.getElementById('content'));
-    </script>
   </body>
+
+  <script type="text/javascript" src = "build/app.js"></script>
 </html>
