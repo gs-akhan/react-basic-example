@@ -7,8 +7,7 @@
         "comment" : "This is Jenny, She is amaizing developer. And she also does testing. She plays violen too. Also a great TT player, some say ",
         "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny"
       }];
-
-
+      
       var Comment = React.createClass({displayName: "Comment",
       	render : function() {
       		return (
@@ -31,7 +30,12 @@
       var CommentActions = React.createClass({displayName: "CommentActions",
         render : function (argument) {
           return (React.createElement("div", null, 
-            React.createElement("span", null, "Like"), " ", React.createElement("span", null, "Reply")
+            React.createElement("div", {className: "actionControl"}, 
+            	React.createElement("i", {className: "fa fa-reply fa-1"}, " Reply ")
+            ), 
+            React.createElement("div", {className: "actionControl"}, 
+            	React.createElement("i", {className: "fa fa-thumbs-o-up fa-1"}, " Like ")
+            )
             ));
         }
       });

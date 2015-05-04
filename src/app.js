@@ -7,8 +7,7 @@
         "comment" : "This is Jenny, She is amaizing developer. And she also does testing. She plays violen too. Also a great TT player, some say ",
         "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny"
       }];
-
-
+      
       var Comment = React.createClass({
       	render : function() {
       		return (
@@ -31,7 +30,12 @@
       var CommentActions = React.createClass({
         render : function (argument) {
           return (<div>
-            <span>Like</span> <span>Reply</span>  
+            <div className = "actionControl">
+            	<i className = "fa fa-reply fa-1"> Reply </i>
+            </div>
+            <div className = "actionControl">
+            	<i className = "fa fa-thumbs-o-up fa-1"> Like </i>
+            </div>
             </div>);
         }
       });
