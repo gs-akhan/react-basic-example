@@ -70,8 +70,8 @@
           return (
             <div>
               <div className = "allCommentContainer">
-              {comments}
               <CommentForm submitdata = {this.submitFormAndRefresh} />
+               {comments}
               </div>
             </div>
             );
@@ -82,25 +82,37 @@
       var CommentForm = React.createClass({
 
         render : function() {
-          var textAreaStyle = {
-            width : "100%",
-            height : "60px",
-            resize : "none",
-            border : "1px solid #ddd",
-            outline : "none",
-            "box-sizing": "border-box"
-          }
-
           var formStyle = {
-            width : "350px;",
+            width : "500px;",
             margin : "0 auto"
           }
 
-          return (<div style = {formStyle}>
-              <form>
-              <textarea  placeholder = "Enter your comment" style = {textAreaStyle} ref = "postdata" onKeyUp = {this.handleKeyUp}>
+          return (
+            <div className = "postForm" style = {formStyle}>
 
-              </textarea>
+              <div className = "postHeader">
+                <ul className = "postHeaderItems" >
+                  <li><i className="fa fa-comment"></i>Update Status</li>
+                  <li><i className="fa fa-camera"></i>Add Photo/Video</li>
+                  <li><i className="fa fa-files-o"></i>Create Photo Album</li>
+                </ul>
+              </div>
+              <form>
+              
+              <div className = "textAreaWrapper">
+                <textarea  placeholder = "Enter your comment" ref = "postdata" onKeyUp = {this.handleKeyUp}>
+
+                </textarea>
+              </div>
+
+              <div className = "postControls">
+                <ul className = "footerItems">  
+                  <li><i className ="fa fa-camera-retro"></i></li>
+                  <li><i className ="fa fa-map-marker"></i></li>
+                  <li><i className ="fa fa-user-plus"></i></li>
+
+                </ul>
+              </div>
               </form>
             </div>);
         },
@@ -118,3 +130,6 @@
       });
 
       React.render(<CommentBox data = {data} />, document.getElementById('content'));
+
+
+

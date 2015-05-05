@@ -70,8 +70,8 @@
           return (
             React.createElement("div", null, 
               React.createElement("div", {className: "allCommentContainer"}, 
-              comments, 
-              React.createElement(CommentForm, {submitdata: this.submitFormAndRefresh})
+              React.createElement(CommentForm, {submitdata: this.submitFormAndRefresh}), 
+               comments
               )
             )
             );
@@ -82,24 +82,36 @@
       var CommentForm = React.createClass({displayName: "CommentForm",
 
         render : function() {
-          var textAreaStyle = {
-            width : "100%",
-            height : "60px",
-            resize : "none",
-            border : "1px solid #ddd",
-            outline : "none",
-            "box-sizing": "border-box"
-          }
-
           var formStyle = {
-            width : "350px;",
+            width : "500px;",
             margin : "0 auto"
           }
 
-          return (React.createElement("div", {style: formStyle}, 
-              React.createElement("form", null, 
-              React.createElement("textarea", {placeholder: "Enter your comment", style: textAreaStyle, ref: "postdata", onKeyUp: this.handleKeyUp}
+          return (
+            React.createElement("div", {className: "postForm", style: formStyle}, 
 
+              React.createElement("div", {className: "postHeader"}, 
+                React.createElement("ul", {className: "postHeaderItems"}, 
+                  React.createElement("li", null, React.createElement("i", {className: "fa fa-comment"}), "Update Status"), 
+                  React.createElement("li", null, React.createElement("i", {className: "fa fa-camera"}), "Add Photo/Video"), 
+                  React.createElement("li", null, React.createElement("i", {className: "fa fa-files-o"}), "Create Photo Album")
+                )
+              ), 
+              React.createElement("form", null, 
+              
+              React.createElement("div", {className: "textAreaWrapper"}, 
+                React.createElement("textarea", {placeholder: "Enter your comment", ref: "postdata", onKeyUp: this.handleKeyUp}
+
+                )
+              ), 
+
+              React.createElement("div", {className: "postControls"}, 
+                React.createElement("ul", {className: "footerItems"}, 
+                  React.createElement("li", null, React.createElement("i", {className: "fa fa-camera-retro"})), 
+                  React.createElement("li", null, React.createElement("i", {className: "fa fa-map-marker"})), 
+                  React.createElement("li", null, React.createElement("i", {className: "fa fa-user-plus"}))
+
+                )
               )
               )
             ));
@@ -118,3 +130,6 @@
       });
 
       React.render(React.createElement(CommentBox, {data: data}), document.getElementById('content'));
+
+
+
