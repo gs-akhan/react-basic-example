@@ -8,9 +8,44 @@
         "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny"
       }];
       
+
+      var CommentReplyBox = React.createClass({
+
+        render : function() {
+          return (
+              <div className = "commentReply">
+                <textarea className = "commentReplyBox"></textarea>
+              </div>
+            )
+        },
+
+      });
+
+
+
       var Comment = React.createClass({
-      	render : function() {
-      		return (
+      	
+        getInitialState : function (argument) {
+          return {showRBox : false};
+        },
+
+        showReplyBox : function() {
+          var _showState = this.state.showRBox;
+          
+          _showState ^= 1;
+
+          this.setState({
+            showRBox : _showState
+          });
+        },
+        render : function() {
+      		var partial;
+          if(this.state.showRBox) {
+            partial  = <CommentReplyBox />
+          } else {
+            partial = "";
+          }
+          return (
             <div className = "commentWrapper">
               <div className = "imageSection">
                <img src = {this.props.img} />
@@ -19,9 +54,9 @@
               <div className = "eachComment">
                 <a className = "commentAuthor" href = "javascript:void(0)">{this.props.author}</a>
                 <span className = "commentContent">{this.props.comment}</span>
-                <CommentActions />
+                <CommentActions showReplyBox = {this.showReplyBox} />
               </div>
-
+              {partial}
             </div>);
       	}
       });
@@ -31,7 +66,7 @@
         render : function (argument) {
           return (<div>
             <div className = "actionControl">
-            	<i className = "fa fa-reply fa-1"> Reply </i>
+            	<i className = "fa fa-reply fa-1" onClick = {this.props.showReplyBox}> Reply </i>
             </div>
             <div className = "actionControl">
             	<i className = "fa fa-thumbs-o-up fa-1"> Like </i>
@@ -56,7 +91,7 @@
          }) 
         },
         submitFormAndRefresh : function (obj) {
-          this.state.data.push(obj);
+          this.state.data.unshift(obj);
           this.setState({
             data : data
           });

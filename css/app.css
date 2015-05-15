@@ -83,4 +83,9 @@
 .postHeaderItems li i {
  margin-right: 5px;
 }
+.commentReplyBox {
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+}
 

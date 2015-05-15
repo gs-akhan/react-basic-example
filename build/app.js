@@ -8,9 +8,44 @@
         "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny"
       }];
       
+
+      var CommentReplyBox = React.createClass({displayName: "CommentReplyBox",
+
+        render : function() {
+          return (
+              React.createElement("div", {className: "commentReply"}, 
+                React.createElement("textarea", {className: "commentReplyBox"})
+              )
+            )
+        },
+
+      });
+
+
+
       var Comment = React.createClass({displayName: "Comment",
-      	render : function() {
-      		return (
+      	
+        getInitialState : function (argument) {
+          return {showRBox : false};
+        },
+
+        showReplyBox : function() {
+          var _showState = this.state.showRBox;
+          
+          _showState ^= 1;
+
+          this.setState({
+            showRBox : _showState
+          });
+        },
+        render : function() {
+      		var partial;
+          if(this.state.showRBox) {
+            partial  = React.createElement(CommentReplyBox, null)
+          } else {
+            partial = "";
+          }
+          return (
             React.createElement("div", {className: "commentWrapper"}, 
               React.createElement("div", {className: "imageSection"}, 
                React.createElement("img", {src: this.props.img})
@@ -19,9 +54,9 @@
               React.createElement("div", {className: "eachComment"}, 
                 React.createElement("a", {className: "commentAuthor", href: "javascript:void(0)"}, this.props.author), 
                 React.createElement("span", {className: "commentContent"}, this.props.comment), 
-                React.createElement(CommentActions, null)
-              )
-
+                React.createElement(CommentActions, {showReplyBox: this.showReplyBox})
+              ), 
+              partial
             ));
       	}
       });
@@ -31,7 +66,7 @@
         render : function (argument) {
           return (React.createElement("div", null, 
             React.createElement("div", {className: "actionControl"}, 
-            	React.createElement("i", {className: "fa fa-reply fa-1"}, " Reply ")
+            	React.createElement("i", {className: "fa fa-reply fa-1", onClick: this.props.showReplyBox}, " Reply ")
             ), 
             React.createElement("div", {className: "actionControl"}, 
             	React.createElement("i", {className: "fa fa-thumbs-o-up fa-1"}, " Like ")
@@ -56,7 +91,7 @@
          }) 
         },
         submitFormAndRefresh : function (obj) {
-          this.state.data.push(obj);
+          this.state.data.unshift(obj);
           this.setState({
             data : data
           });
