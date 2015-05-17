@@ -1,32 +1,59 @@
  	var data = [{
         "author" : "Azhar",
         "comment" : "This is azhar, He writes lots of code every day",
-        "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Azhar"
+        "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Azhar",
+        
+        "replies" : [{
+          author : "jenny",
+          comment : "Azhar says he is cool"
+        }],
+
+
+        "postedDate" : moment().format('MMMM Do YYYY, h:mm:ss a')
       }, {
         "author" : "Jenny",
         "comment" : "This is Jenny, She is amaizing developer. And she also does testing. She plays violen too. Also a great TT player, some say ",
-        "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny"
+        "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny",
+        "replies" : [],
+        "postedDate" : moment().format('MMMM Do YYYY, h:mm:ss a')
       }];
       
-
       var CommentReplyBox = React.createClass({displayName: "CommentReplyBox",
-
+        /*Prop Valiadtion*/
+        
+        propTypes : function() {
+          return {
+            replyPosted : React.React.PropTypes.func.isRequired
+          }
+        },
         render : function() {
           return (
               React.createElement("div", {className: "commentReply"}, 
-                React.createElement("textarea", {className: "commentReplyBox"})
+                React.createElement("div", {className: "imageSection"}, 
+                  React.createElement("img", {src: "http://dummyimage.com/32x32/0088cc/ffffff.gif&text=.Jenny"})
+                ), 
+                React.createElement("textarea", {ref: "replyTextBox", onKeyUp: this.props.replyPosted, className: "commentReplyBox", placeholder: "write a comment..."})
               )
             )
-        },
+        }
 
       });
 
 
+      // This is the CommentPOST (When User posts new status)
 
-      var Comment = React.createClass({displayName: "Comment",
-      	
+      var CommentPost = React.createClass({displayName: "CommentPost",
+        /*
+          Setting Default props, for posts that does not have replies, we need empty array for that.
+        */
+        getDefaultProps : function() {
+          return  {
+            replies : []
+          }
+        },
+
         getInitialState : function (argument) {
-          return {showRBox : false};
+          return {showRBox : false, replies : this.props.replies};
         },
 
         showReplyBox : function() {
@@ -38,38 +65,99 @@
             showRBox : _showState
           });
         },
+        replyPosted : function (evt) {
+          if(evt.which === 13) {
+            var replies = this.state.replies;
+
+            replies.push({
+              author : "Azhar",
+              comment : evt.currentTarget.value
+            });
+
+            this.setState({
+              replies : replies
+            })
+          
+            //Clear the text Box
+
+            this.refs.replyBoxComponent.refs.replyTextBox.getDOMNode().value = ""
+          }
+
+          
+        },
         render : function() {
       		var partial;
+          
+
           if(this.state.showRBox) {
-            partial  = React.createElement(CommentReplyBox, null)
+            partial  = React.createElement(CommentReplyBox, {ref: "replyBoxComponent", replyPosted: this.replyPosted})
           } else {
             partial = "";
           }
+          
+
+          var repliesArray = this.state.replies.map(function(item) {
+            return (React.createElement(ReplyPost, {reply: item.comment}))
+          });
+
+
           return (
             React.createElement("div", {className: "commentWrapper"}, 
-              React.createElement("div", {className: "imageSection"}, 
-               React.createElement("img", {src: this.props.img})
+              React.createElement("div", {className: "postTopSection"}, 
+                  React.createElement("div", {className: "imageSection"}, 
+                   React.createElement("img", {src: this.props.img})
+                  ), 
+                  React.createElement("div", {className: "nameAndDateContainer"}, 
+                      React.createElement("div", {className: "authorHolder"}, 
+                        React.createElement("a", {className: "commentAuthor", href: "javascript:void(0)"}, this.props.author)
+                      ), 
+                      React.createElement("div", {className: "dateHolder"}, " ", this.props.postedDate)
+                  )
               ), 
-              
+
               React.createElement("div", {className: "eachComment"}, 
-                React.createElement("a", {className: "commentAuthor", href: "javascript:void(0)"}, this.props.author), 
-                React.createElement("span", {className: "commentContent"}, this.props.comment), 
+                React.createElement("div", {className: "commentContent"}, this.props.comment), 
                 React.createElement(CommentActions, {showReplyBox: this.showReplyBox})
               ), 
-              partial
+              partial, 
+
+              
+              repliesArray
+              
             ));
       	}
       });
 
 
+      var ReplyPost = React.createClass({displayName: "ReplyPost",
+
+          render : function (argument) {
+            return (
+                React.createElement("div", {className: "replyPost"}, 
+                  React.createElement("div", {className: "imageSection"}, 
+                    React.createElement("img", {src: "http://dummyimage.com/32x32/0088cc/ffffff.gif&text=.Jenny"})
+                  ), 
+                  React.createElement("div", {className: "replyContent"}, 
+                    this.props.reply
+                  ), 
+                  React.createElement("div", {className: "spacer"})
+                )
+              );  
+          }
+      }); 
+
       var CommentActions = React.createClass({displayName: "CommentActions",
+
         render : function (argument) {
-          return (React.createElement("div", null, 
+          return (React.createElement("div", {className: "actionControlsContainer"}, 
             React.createElement("div", {className: "actionControl"}, 
-            	React.createElement("i", {className: "fa fa-reply fa-1", onClick: this.props.showReplyBox}, " Reply ")
+            	React.createElement("i", {className: "fa fa-reply fa-1 actionLinks", onClick: this.props.showReplyBox}, " Reply ")
             ), 
             React.createElement("div", {className: "actionControl"}, 
-            	React.createElement("i", {className: "fa fa-thumbs-o-up fa-1"}, " Like ")
+            	React.createElement("i", {className: "fa fa-thumbs-o-up fa-1 actionLinks"}, " Like ")
+            ), 
+             React.createElement("div", {className: "actionControl"}, 
+              React.createElement("i", {className: "fa fa-retweet actionLinks"}, " Share ")
             )
             ));
         }
@@ -99,7 +187,12 @@
         render : function(argument) {
          
          var comments = this.state.data.map(function(item) {
-            return (React.createElement(Comment, {author: item.author, comment: item.comment, img: item.img}));
+            return (React.createElement(CommentPost, {postedDate: item.postedDate, 
+                    author: item.author, 
+                    comment: item.comment, 
+                    img: item.img, 
+                    replies: item.replies})
+                  );
           });
           
           return (
@@ -117,13 +210,10 @@
       var CommentForm = React.createClass({displayName: "CommentForm",
 
         render : function() {
-          var formStyle = {
-            width : "500px;",
-            margin : "0 auto"
-          }
+          
 
           return (
-            React.createElement("div", {className: "postForm", style: formStyle}, 
+            React.createElement("div", {className: "postForm"}, 
 
               React.createElement("div", {className: "postHeader"}, 
                 React.createElement("ul", {className: "postHeaderItems"}, 
@@ -156,7 +246,8 @@
             this.props.submitdata({
               author : "azhar",
               comment : evt.currentTarget.value,
-              img : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny"
+              img : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny",
+              postedDate : moment().format('MMMM Do YYYY, h:mm:ss a')
             });
 
             React.findDOMNode(this.refs.postdata).value = "";
@@ -165,6 +256,3 @@
       });
 
       React.render(React.createElement(CommentBox, {data: data}), document.getElementById('content'));
-
-
-

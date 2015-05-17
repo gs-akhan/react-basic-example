@@ -7,10 +7,11 @@
 }
 .commentWrapper {
   overflow: auto;
-  width : 350px;
+  width : 500px;
   border: 1px solid #ddd;
-  padding: 3px;
+  padding: 12px;
   margin : 0px auto;
+  margin-bottom: 10px;
   box-sizing: border-box;
 }
 
@@ -19,8 +20,11 @@
 }
 .eachComment {
   line-height : 20px;
-  float: right;
-  width : 88%;
+  width : 100%;
+  clear: both;
+}
+.nameAndDateContainer {
+  float: left;
 }
 .actionControl {
   display:inline-block;
@@ -30,8 +34,11 @@
 }
 .postForm {
   border: 1px solid #ddd;
-  
+  margin: 0px auto;
+  margin-bottom: 15px;
+  width: 500px;
 }
+
 .postForm textarea {
   border: 0px;
   font-size: 14px;
@@ -83,9 +90,60 @@
 .postHeaderItems li i {
  margin-right: 5px;
 }
-.commentReplyBox {
-  width: 100%;
-  box-sizing: border-box;
-  resize: none;
+.commentReply {
+  margin-top: 10px;
 }
 
+.replyContent, .commentReplyBox {
+  width: 90%;
+  border-color: #dcdee3;
+  box-sizing: border-box;
+  resize: none;
+  padding-top: 2px;
+}
+.commentReplyBox:focus {
+    outline: 0;
+}
+.nameAndDateContainer {
+  display: inline-block;
+}
+.authorHolder a{
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #3b5998;
+  cursor: pointer;
+  text-decoration: none;
+}
+.dateHolder {
+  display: block;
+}
+.dateHolder span{
+  font-weight: normal;
+  zoom: 1;
+  color: rgb(145, 151, 163);
+  font-size: 12px;
+}
+.postTopSection {
+  margin-bottom: 12px;
+  overflow: auto;
+}
+.actionLinks  {
+  color: rgb(109, 132, 180);
+  cursor: pointer;
+  display: inline;
+  font-size: 12px;
+  height: auto;
+}
+.actionControlsContainer {
+  margin-top: 12px;
+}
+.spacer {
+  clear: both;
+}
+.replyPost {
+  display: block;
+  clear: both;
+  margin-bottom: 6px;
+  height: auto;
+}
