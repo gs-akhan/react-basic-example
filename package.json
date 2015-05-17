@@ -1,0 +1,27 @@
+{
+  "name": "react-basic-example",
+  "version": "0.0.1",
+  "description": "Facebook like commenting using react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "watchify -t reactify src/app.js -o build/bundle.js -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gs-akhan/react-basic-example.git"
+  },
+  "keywords": [
+    "reactjsexample"
+  ],
+  "author": "Azhar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gs-akhan/react-basic-example/issues"
+  },
+  "homepage": "https://github.com/gs-akhan/react-basic-example",
+  "dependencies": {
+    "browserify": "^10.2.0",
+    "reactify": "^1.1.1"
+  }
+}
