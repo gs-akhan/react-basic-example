@@ -35,6 +35,7 @@ var CommentForm = React.createClass({
         handleKeyUp : function (evt) {
           if(evt.keyCode === 13) {
             this.props.submitdata({
+              id : Math.random() * 100000,
               author : "azhar",
               comment : evt.currentTarget.value,
               img : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny",

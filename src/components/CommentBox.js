@@ -12,12 +12,13 @@ var CommentBox = React.createClass({
         },
         submitFormAndRefresh : function (obj) {
            
-          var newData = React.addons.update(this.state.data, {
-            $unshift : [obj]
-          });
-
+          // var newData = React.addons.update(this.state.data, {
+          //   $unshift : [obj]
+          // });
+  
+          this.state.data.unshift(obj);
           this.setState({
-            data : newData
+            data : this.state.data
           });
         },  
         
@@ -28,7 +29,7 @@ var CommentBox = React.createClass({
                     author = {item.author}  
                     comment = {item.comment} 
                     img = {item.img}
-                    replies = {item.replies} />
+                    replies = {item.replies} key = {item.id} />
                   );
           });
           

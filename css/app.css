@@ -126,7 +126,8 @@
 }
 .postTopSection {
   margin-bottom: 12px;
-  overflow: auto;
+  overflow: hidden;
+
 }
 .actionLinks  {
   color: rgb(109, 132, 180);

@@ -33,12 +33,13 @@ var CommentBox = React.createClass({displayName: "CommentBox",
         },
         submitFormAndRefresh : function (obj) {
            
-          var newData = React.addons.update(this.state.data, {
-            $unshift : [obj]
-          });
-
+          // var newData = React.addons.update(this.state.data, {
+          //   $unshift : [obj]
+          // });
+  
+          this.state.data.unshift(obj);
           this.setState({
-            data : newData
+            data : this.state.data
           });
         },  
         
@@ -49,7 +50,7 @@ var CommentBox = React.createClass({displayName: "CommentBox",
                     author: item.author, 
                     comment: item.comment, 
                     img: item.img, 
-                    replies: item.replies})
+                    replies: item.replies, key: item.id})
                   );
           });
           
@@ -104,6 +105,7 @@ var CommentForm = React.createClass({displayName: "CommentForm",
         handleKeyUp : function (evt) {
           if(evt.keyCode === 13) {
             this.props.submitdata({
+              id : Math.random() * 100000,
               author : "azhar",
               comment : evt.currentTarget.value,
               img : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny",
@@ -259,6 +261,7 @@ var CommentReplyBox = React.createClass({displayName: "CommentReplyBox",
 
 },{}],7:[function(require,module,exports){
 var data = [{
+  "id" : Math.random() * 1000000,
   "author" : "Azhar",
   "comment" : "This is azhar, He writes lots of code every day",
   "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Azhar",
@@ -271,6 +274,7 @@ var data = [{
 
   "postedDate" : moment().format('MMMM Do YYYY, h:mm:ss a')
 }, {
+  "id" : Math.random() * 1000000,
   "author" : "Jenny",
   "comment" : "This is Jenny, She is amaizing developer. And she also does testing. She plays violen too. Also a great TT player, some say ",
   "img" : "http://dummyimage.com/32x32/0088cc/ffffff.gif&amp;text=.Jenny",
