@@ -1,4 +1,9 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var data = require('./data');
+var CommentBox = require('./components/CommentBox');
+React.render(React.createElement(CommentBox, {data: data}), document.getElementById('content'));
+
+},{"./components/CommentBox":3,"./data":8}],2:[function(require,module,exports){
 var CommentActions = React.createClass({displayName: "CommentActions",
 
   render : function (argument) {
@@ -18,7 +23,7 @@ var CommentActions = React.createClass({displayName: "CommentActions",
 
 module.exports = CommentActions;
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 
 var CommentPost = require('./CommentPost');  
 var CommentForm = require('./CommentForm');
@@ -67,7 +72,7 @@ var CommentBox = React.createClass({displayName: "CommentBox",
       });
 module.exports = CommentBox;
 
-},{"./CommentForm":3,"./CommentPost":4}],3:[function(require,module,exports){
+},{"./CommentForm":4,"./CommentPost":5}],4:[function(require,module,exports){
 var CommentForm = React.createClass({displayName: "CommentForm",
 
         render : function() {
@@ -121,7 +126,7 @@ var CommentForm = React.createClass({displayName: "CommentForm",
 
 module.exports = CommentForm;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 // This is the CommentPOST (When User posts new status)
 
 var CommentReplyBox = require('./CommentReplyBox');
@@ -215,7 +220,7 @@ var CommentPost = React.createClass({displayName: "CommentPost",
       });
 module.exports = CommentPost;
 
-},{"./CommentActions":1,"./CommentReplyBox":5,"./ReplyPost":6}],5:[function(require,module,exports){
+},{"./CommentActions":2,"./CommentReplyBox":6,"./ReplyPost":7}],6:[function(require,module,exports){
 var CommentReplyBox = React.createClass({displayName: "CommentReplyBox",
     /*Prop Valiadtion*/
 
@@ -239,7 +244,7 @@ var CommentReplyBox = React.createClass({displayName: "CommentReplyBox",
 
   module.exports = CommentReplyBox;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
  var ReplyPost = React.createClass({displayName: "ReplyPost",
 
           render : function (argument) {
@@ -259,7 +264,7 @@ var CommentReplyBox = React.createClass({displayName: "CommentReplyBox",
 
  module.exports = ReplyPost;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var data = [{
   "id" : Math.random() * 1000000,
   "author" : "Azhar",
@@ -284,10 +289,4 @@ var data = [{
 
 module.exports = data;
 
-},{}],8:[function(require,module,exports){
-var data = require('./data');
-var CommentBox = require('./components/CommentBox');
-
-React.render(React.createElement(CommentBox, {data: data}), document.getElementById('content'));
-
-},{"./components/CommentBox":2,"./data":7}]},{},[8]);
+},{}]},{},[1]);
